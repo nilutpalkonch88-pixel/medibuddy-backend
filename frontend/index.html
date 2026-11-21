@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a52b32">
+  <title>MEDIBUDDY 3.0 | Wellness & Medication</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">M</span><div><b>MEDIBUDDY</b><small>CARE • WELLNESS • ROUTINE</small></div></div>
+    <div class="side-caption">WORKSPACE</div>
+    <a class="nav-link active" href="#overview">⌂ <span data-t="overview">Overview</span></a>
+    <a class="nav-link" href="#medication">✚ <span data-t="medication">Medication</span></a>
+    <a class="nav-link" href="#wellness">❋ <span data-t="wellness">Wellness Studio</span></a>
+    <a class="nav-link" href="#history">◷ <span data-t="history">History</span></a>
+    <div class="sidebar-bottom"><span class="assam-stripe"></span><p>Inspired by Assam<br><small>Designed with care</small></p></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><span class="eyebrow">YOUR PERSONAL CARE SPACE</span><h1 data-t="welcome">A healthier routine starts here.</h1></div>
+      <select id="language" aria-label="Language"><option value="en">English</option><option value="as">অসমীয়া</option><option value="hi">हिन्दी</option></select>
+    </header>
+
+    <section id="overview" class="hero">
+      <div><span class="hero-tag">নমস্কাৰ • NAMASKAR</span><h2 data-t="heroTitle">Your health. Your schedule. Your care.</h2><p data-t="heroText">Keep your medication routine organised and track everyday wellness habits.</p></div>
+      <div class="hero-art" aria-hidden="true"><span>✿</span><b>আসাম</b><small>CARE WITH CULTURE</small></div>
+    </section>
+
+    <section class="stats">
+      <article class="stat-card"><span data-t="totalMedicines">Total medicines</span><b id="statTotal">0</b><small>IN YOUR LIST</small></article>
+      <article class="stat-card"><span data-t="takenToday">Taken today</span><b id="statTaken">0</b><small>MARKED TAKEN</small></article>
+      <article class="stat-card"><span data-t="skippedToday">Skipped today</span><b id="statSkipped">0</b><small>MARKED SKIPPED</small></article>
+      <article class="stat-card"><span data-t="lowStock">Low stock</span><b id="statLow">0</b><small>5 OR FEWER</small></article>
+    </section>
+
+    <section id="medication" class="panel">
+      <div class="section-heading"><div><span class="eyebrow">MEDICATION MANAGER</span><h2 data-t="medication">Medication</h2></div><button class="btn primary" id="addMedicine">＋ <span data-t="addMedicine">Add medicine</span></button></div>
+      <form id="medicineForm" class="medicine-form hidden">
+        <input type="hidden" id="medicineId">
+        <label><span data-t="medicineName">Medicine name</span><input id="medicineName" required maxlength="100" placeholder="Medicine name"></label>
+        <label><span data-t="dosage">Dosage</span><input id="dosage" maxlength="80" placeholder="As prescribed"></label>
+        <label><span data-t="time">Time</span><input id="medicineTime" type="time"></label>
+        <label><span data-t="stock">Stock</span><input id="stock" type="number" min="0" max="100000" value="0"></label>
+        <label class="wide"><span data-t="instructions">Notes / instructions</span><input id="instructions" maxlength="250" placeholder="Optional notes"></label>
+        <div class="form-actions wide"><button class="btn primary" type="submit" data-t="save">Save</button><button class="btn soft" type="button" id="cancelMedicine" data-t="cancel">Cancel</button></div>
+        <p class="form-error wide" id="formError"></p>
+      </form>
+      <div class="table-wrap"><table><thead><tr><th data-t="medicine">Medicine</th><th data-t="dosage">Dosage</th><th data-t="time">Time</th><th data-t="stock">Stock</th><th data-t="actions">Actions</th></tr></thead><tbody id="medicineRows"><tr><td colspan="5" class="empty">Loading medicines…</td></tr></tbody></table></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading"><div><span class="eyebrow">TODAY'S ROUTINE</span><h2 data-t="todaysSchedule">Today's schedule</h2></div><span class="date-pill" id="todayDate"></span></div>
+      <div id="scheduleList" class="schedule-list"><p class="empty">Loading schedule…</p></div>
+    </section>
+
+    <section id="wellness" class="panel wellness-panel">
+      <div class="section-heading"><div><span class="eyebrow">ASSAMESE-INSPIRED WELLNESS</span><h2 data-t="wellness">Wellness Studio</h2><p class="muted" data-t="wellnessIntro">Track personal activities and reflect on your day.</p></div><span class="leaf">❋</span></div>
+      <div class="wellness-grid">
+        <article class="well-card timer-card"><span class="eyebrow" data-t="activityTimer">ACTIVITY TIMER</span><div id="clock">00:00:00</div>
+          <label data-t="activityType">Activity type</label><select id="activityType"><option>Walking</option><option>Gentle stretching</option><option>Yoga</option><option>Other</option></select>
+          <div class="button-row"><button class="btn primary" id="startTimer">▶ Start</button><button class="btn soft" id="pauseTimer">Ⅱ Pause</button><button class="btn soft" id="finishTimer">✓ Save</button></div><p id="timerStatus" class="muted" aria-live="polite">Ready when you are.</p>
+        </article>
+        <article class="well-card"><span class="eyebrow" data-t="dailyGoal">DAILY GOAL</span><div class="goal-number"><b id="goalMinutes">0</b><span>/ <span id="goalTarget">30</span> min</span></div><div class="progress"><i id="goalProgress"></i></div><label data-t="goalLabel">Daily activity goal (minutes)</label><div class="inline-input"><input id="goalInput" type="number" min="1" max="600" value="30"><button class="btn primary" id="saveGoal" data-t="save">Save</button></div></article>
+        <article class="well-card"><span class="eyebrow" data-t="weeklyActivity">WEEKLY ACTIVITY</span><div class="goal-number"><b id="weekTotal">0</b><span>minutes</span></div><div id="weekChart" class="week-chart"></div></article>
+        <article class="well-card"><span class="eyebrow" data-t="reflection">DAILY REFLECTION</span><h3 data-t="howDay">How was your day?</h3><textarea id="journal" rows="4" maxlength="1000" placeholder="Write a private note for yourself…"></textarea><button class="btn primary" id="saveJournal" data-t="saveNote">Save note</button><p id="journalStatus" class="muted" aria-live="polite"></p></article>
+      </div>
+      <div class="activity-history"><div class="section-heading"><h3 data-t="recentActivities">Recent activities</h3><button class="text-button" id="clearActivities" data-t="clearHistory">Clear history</button></div><div id="activityRows"><p class="empty">No activities yet.</p></div></div>
+      <p class="disclaimer" data-t="disclaimer">Wellness tracking is for personal organisation only. It is not medical advice or a medical device. Follow guidance from a qualified healthcare professional.</p>
+    </section>
+
+    <section id="history" class="panel"><div class="section-heading"><div><span class="eyebrow">MEDICATION RECORD</span><h2 data-t="history">History</h2></div></div><div id="medicationHistory"><p class="empty">No medication history yet.</p></div></section>
+    <footer>Developed by <b>Nilutpal Konch</b> © 2026 <span>অসম • ASSAM</span></footer>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/app.js"></script>
+</body>
+</html>
